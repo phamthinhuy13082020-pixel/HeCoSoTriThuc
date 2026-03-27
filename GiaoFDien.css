@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center;
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    padding: 20px;
+}
+
+/* LEFT PANEL */
+.left-panel {
+    width: 350px;
+    background: rgba(255,255,255,0.9);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-group {
+    margin-top: 10px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+select {
+    width: 100%;
+    padding: 6px;
+}
+
+/* BUTTONS */
+.button-group {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    padding: 6px 10px;
+    border: none;
+    background: #ccc;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn.primary {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn.danger {
+    background: red;
+    color: white;
+}
+
+/* RULE BOX */
+.rule-box {
+    margin-top: 20px;
+    background: #eee;
+    padding: 10px;
+    height: 150px;
+    border-radius: 5px;
+}
+
+/* RIGHT PANEL */
+.right-panel {
+    flex: 1;
+    margin-left: 20px;
+    background: rgba(255,255,255,0.9);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.image-box {
+    margin-top: 10px;
+    height: 400px;
+    background: #ddd;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.footer button {
+    margin: 5px;
+    padding: 8px 15px;
+}

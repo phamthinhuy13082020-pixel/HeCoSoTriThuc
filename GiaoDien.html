@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Hệ chuyên gia tư vấn quán ăn Sa Đéc</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center;
+            background-size: cover;
+        }
+
+        .container {
+            display: flex;
+            padding: 20px;
+        }
+
+        .left-panel {
+            width: 350px;
+            background: rgba(255,255,255,0.9);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-top: 10px;
+        }
+
+        select {
+            width: 100%;
+            padding: 6px;
+        }
+
+        .button-group {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 6px 10px;
+            border: none;
+            background: #ccc;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .primary { background: green; color: white; }
+        .danger { background: red; color: white; }
+
+        .rule-box {
+            margin-top: 20px;
+            background: #eee;
+            padding: 10px;
+            min-height: 150px;
+        }
+
+        .right-panel {
+            flex: 1;
+            margin-left: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .image-box {
+            height: 300px;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-box img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .info-box {
+            margin-top: 10px;
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .footer button {
+            margin: 5px;
+            padding: 8px 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LEFT -->
+    <div class="left-panel">
+        <h3>CHỌN THÔNG TIN</h3>
+
+        <div class="form-group">
+            <label>KHU VỰC</label>
+            <select id="area">
+                <option value="">Chọn khu vực</option>
+                <option value="P1">P1</option>
+                <option value="P2">P2</option>
+                <option value="P3">P3</option>
+                <option value="P4">P4</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>GIÁ</label>
+            <select id="price">
+                <option value="">Chọn giá</option>
+                <option value="G1">20-35k</option>
+                <option value="G2">36-40k</option>
+                <option value="G3">41-50k</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>DỊCH VỤ</label>
+            <select id="service">
+                <option value="">Chọn dịch vụ</option>
+                <option value="M1">Món khô</option>
+                <option value="M2">Món nước</option>
+                <option value="M3">Lẩu</option>
+                <option value="M4">Nướng</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>SỐ LƯỢNG</label>
+            <select id="people">
+                <option value="">Chọn</option>
+                <option value="S1">1-2 người</option>
+                <option value="S2">3-4 người</option>
+                <option value="S3">5-6 người</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>ĐÁNH GIÁ</label>
+            <select id="rating">
+                <option value="">Chọn</option>
+                <option value="D2">1-2 sao</option>
+                <option value="D3">3-4 sao</option>
+                <option value="D4">4-5 sao</option>
+            </select>
+        </div>
+
+        <div class="button-group">
+            <button class="btn primary" onclick="search()">TÌM KIẾM</button>
+            <button class="btn danger" onclick="resetForm()">XÓA</button>
+        </div>
+
+        <div class="rule-box">
+            <h4>KẾT QUẢ</h4>
+            <p id="rule-output"></p>
+        </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right-panel">
+        <h3>HÌNH ẢNH</h3>
+        <div class="image-box" id="image-box">
+            Chưa có ảnh
+        </div>
+
+        <div class="info-box" id="info-box">
+            <h4>THÔNG TIN QUÁN</h4>
+            Chưa có dữ liệu
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    <button>HƯỚNG DẪN</button>
+    <button>ĐIỀU KHOẢN</button>
+    <button>LIÊN HỆ</button>
+</div>
+
+<script>
+function search() {
+    let area = document.getElementById("area").value;
+    let price = document.getElementById("price").value;
+    let service = document.getElementById("service").value;
+    let people = document.getElementById("people").value;
+    let rating = document.getElementById("rating").value;
+
+    let result = "Không tìm thấy";
+    let rule = "";
+    let desc = "";
+    let img = "";
+    let info = "";
+
+    const mapArea = {P1:"Phường 1", P2:"Phường 2", P3:"Phường 3", P4:"Phường 4"};
+    const mapPrice = {G1:"20.000 – 35.000đ", G2:"36.000 – 40.000đ", G3:"41.000 – 50.000đ"};
+    const mapPeople = {S1:"1–2 người", S2:"3–4 người", S3:"5–6 người"};
+    const mapService = {M1:"món khô", M2:"món nước", M3:"lẩu", M4:"đồ nướng"};
+    const mapRating = {D2:"1–2 sao", D3:"3–4 sao", D4:"4–5 sao"};
+
+    if(area==="P1" && price==="G1" && service==="M2" && people==="S1" && rating==="D4"){
+        result = "Hủ tiếu Bà Sẩm";
+        rule = "P1 ˄ G1 ˄ S1 ˄ M2 ˄ K2 ˄ D4 → T1";
+        img = "https://via.placeholder.com/400x250?text=Hu+Tieu+Ba+Sam";
+
+        info = `
+        <b>Tên quán:</b> Hủ tiếu Bà Sẩm <br>
+        <b>Địa chỉ:</b> 188 Trần Hưng Đạo, Sa Đéc <br>
+        <b>Giờ mở cửa:</b> 06:00 - 21:00 <br>
+        <b>Đặc điểm:</b> Hủ tiếu lâu đời, nước lèo ngọt thanh, giá bình dân.
+        `;
+    }
+
+    if(result !== "Không tìm thấy"){
+        desc = `Nếu bạn muốn ăn <b>${mapService[service]}</b>, 
+        đi nhóm <b>${mapPeople[people]}</b>, 
+        ở <b>${mapArea[area]}</b>, 
+        với mức giá <b>${mapPrice[price]}</b>, 
+        đánh giá <b>${mapRating[rating]}</b> 
+        thì bạn nên đến quán <b>${result}</b>.`;
+    }
+
+    document.getElementById("rule-output").innerHTML =
+        "<b>Tập luận:</b><br>" + desc + "<br><br><b>Biểu diễn:</b><br>" + rule;
+
+    document.getElementById("image-box").innerHTML =
+        img ? `<img src="${img}">` : "Không có ảnh";
+
+    document.getElementById("info-box").innerHTML =
+        "<h4>THÔNG TIN QUÁN</h4>" + info;
+}
+
+function resetForm(){
+    document.querySelectorAll("select").forEach(s => s.value="");
+    document.getElementById("rule-output").innerHTML="";
+    document.getElementById("image-box").innerHTML="Chưa có ảnh";
+    document.getElementById("info-box").innerHTML="<h4>THÔNG TIN QUÁN</h4>Chưa có dữ liệu";
+}
+</script>
+
+</body>
+</html>
